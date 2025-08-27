@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@keyframes bg-pan {
+  0%   { background-position:   0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* ---- Animated sweep (bulletproof) ---- */
+@keyframes sweep-move {
+  0%   { transform: translateX(-33%); }
+  100% { transform: translateX(33%);  }
+}
+
+.sweep-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;       /* hide the extra width as it slides */
+  z-index: -1;            /* behind hero content */
+}
+
+.sweep-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 300%; height: 100%; /* extra width so we can slide */
+  background: linear-gradient(90deg,
+    rgba(34, 211, 238, 0.20),
+    rgba(167, 139, 250, 0.20),
+    rgba(236, 72, 153, 0.20)
+  );
+  filter: blur(0px);      /* set to 30px later if you want softer wash */
+  animation: sweep-move 12s linear infinite;
+}
+
+/* optional subtle corner glows on top */
+.glow-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 10% 10%, rgba(56,189,248,.10), transparent 60%),
+    radial-gradient(800px 500px at 90% 10%, rgba(217,70,239,.08), transparent 60%);
+}
